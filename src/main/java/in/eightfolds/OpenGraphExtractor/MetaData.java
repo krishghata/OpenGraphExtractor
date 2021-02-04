@@ -1,3 +1,5 @@
+package in.eightfolds.OpenGraphExtractor;
+
 import java.util.Map;
 
 public class MetaData {
@@ -20,7 +22,7 @@ public class MetaData {
 
     @Override
     public String toString() {
-        return "MetaData{" +
+        return "in.eightfolds.OpenGraphExtractor.MetaData{" +
                 "data=" + data +
                 '}';
     }

@@ -1,3 +1,5 @@
+package in.eightfolds.OpenGraphExtractor;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;

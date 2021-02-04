@@ -1,3 +1,5 @@
+package in.eightfolds.OpenGraphExtractor;
+
 import java.util.Objects;
 
 public class MetaItem {
@@ -36,7 +38,7 @@ public class MetaItem {
 
     @Override
     public String toString() {
-        return "MetaItem{" +
+        return "in.eightfolds.OpenGraphExtractor.MetaItem{" +
                 "property='" + property + '\'' +
                 ", value='" + value + '\'' +
                 '}';
