@@ -2,15 +2,15 @@ package in.eightfolds.OpenGraphExtractor;
 
 import java.util.Objects;
 
-public class MetaItem {
+public class OpenGraphItem {
     private String property;
     private String actualProperty;
     private String value;
 
-    protected MetaItem() {
+    protected OpenGraphItem() {
     }
 
-    protected MetaItem(String property, String value) {
+    protected OpenGraphItem(String property, String value) {
         this.property = property;
         this.actualProperty = property;
         this.value = value;
@@ -44,7 +44,7 @@ public class MetaItem {
                 '}';
     }
 
-    public MetaItem Clean() {
+    public OpenGraphItem Clean() {
         if(property.contains(":")) {
             setProperty(getProperty().split(":")[1]);
         }
@@ -55,8 +55,8 @@ public class MetaItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        MetaItem metaItem = (MetaItem) o;
-        return Objects.equals(property, metaItem.property);
+        OpenGraphItem openGraphItem = (OpenGraphItem) o;
+        return Objects.equals(property, openGraphItem.property);
     }
 
     @Override

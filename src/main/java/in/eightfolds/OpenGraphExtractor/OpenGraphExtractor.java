@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class MetaExtractor {
+public class OpenGraphExtractor {
 
     public static final String TITLE = "title";
     public static final String DESC = "description";
     public static final String IMAGE = "image";
     public static final String URL = "url";
 
-    public static MetaData extract(String url) throws IOException {
-        return new MetaData(extractToMapItem(url));
+    public static OpenGraphData extract(String url) throws IOException {
+        return new OpenGraphData(extractToMapItem(url));
     }
 
-    private static List<MetaItem> extractToList(String url) throws IOException {
+    private static List<OpenGraphItem> extractToList(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
 
         Elements metaElements = doc.getElementsByTag("meta");
@@ -29,7 +29,7 @@ public class MetaExtractor {
             metaElements.add(titleElements.first());
         }
 
-        List<MetaItem> metaItems = metaElements.stream()
+        List<OpenGraphItem> openGraphItems = metaElements.stream()
                 .map(meta -> {
                     String prop = meta.attr("property").toString();
                     if (prop == null || prop.trim().length() == 0) {
@@ -40,7 +40,7 @@ public class MetaExtractor {
                     }
                     String value = meta.attr("content").toString();
 
-                    return new MetaItem(prop, value);
+                    return new OpenGraphItem(prop, value);
                 })
                 .filter(itm -> itm.getProperty().startsWith("og")
                         || itm.getProperty().startsWith("twitter")
@@ -56,18 +56,18 @@ public class MetaExtractor {
                         return 1;
                     }
                 })
-                .map(MetaItem::Clean)
+                .map(OpenGraphItem::Clean)
                 .distinct()
                 .collect(Collectors.toList());
 
-        return metaItems;
+        return openGraphItems;
     }
 
-    private static Map<String, MetaItem> extractToMapItem(String url) throws IOException {
-        return extractToList(url).stream().collect(Collectors.toMap(MetaItem::getProperty, MetaItem::Clean));
+    private static Map<String, OpenGraphItem> extractToMapItem(String url) throws IOException {
+        return extractToList(url).stream().collect(Collectors.toMap(OpenGraphItem::getProperty, OpenGraphItem::Clean));
     }
 
     public static Map<String, String> extractToMap(String url) throws IOException {
-        return extractToList(url).stream().collect(Collectors.toMap(MetaItem::getProperty, MetaItem::getValue));
+        return extractToList(url).stream().collect(Collectors.toMap(OpenGraphItem::getProperty, OpenGraphItem::getValue));
     }
 }
