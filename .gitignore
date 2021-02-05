@@ -24,3 +24,7 @@ hs_err_pid*
 
 #Intellij
 .idea/
+
+#Target Folder
+target/
+
