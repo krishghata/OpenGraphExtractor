@@ -1,30 +1,17 @@
 package in.eightfolds.OpenGraphExtractor;
 
+import com.google.common.collect.ImmutableMap;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OpenGraphData {
-    private Map<String, OpenGraphItem> data;
-
-    protected OpenGraphData() {
-    }
+    private final Map<String, OpenGraphItem> data;
 
     protected OpenGraphData(Map<String, OpenGraphItem> data) {
         this.data = data;
-    }
-
-    public Map<String, OpenGraphItem> getData() {
-        return data;
-    }
-
-    public void setData(Map<String, OpenGraphItem> data) {
-        this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return "in.eightfolds.OpenGraphExtractor.MetaData{" +
-                "data=" + data +
-                '}';
     }
 
     public String getTitle() {
@@ -75,5 +62,22 @@ public class OpenGraphData {
             }
         }
         return null;
+    }
+
+    public Map<String, String> toMap() {
+        return data.values().stream()
+                .collect(Collectors.collectingAndThen(
+                        Collectors.toMap(OpenGraphItem::getProperty, OpenGraphItem::getValue),
+                        ImmutableMap::copyOf
+                ));
+    }
+
+
+    @Override
+    public String toString() {
+        return data.values().stream()
+                .map(entry -> String.format("%s[%s]: %s", entry.getProperty(), entry.getActualProperty(), entry.getValue()))
+                .collect(Collectors.joining(",\n"));
+
     }
 }

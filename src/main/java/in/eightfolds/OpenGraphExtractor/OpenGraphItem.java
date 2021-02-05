@@ -1,6 +1,8 @@
 package in.eightfolds.OpenGraphExtractor;
 
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class OpenGraphItem {
     private String property;
@@ -38,7 +40,7 @@ public class OpenGraphItem {
 
     @Override
     public String toString() {
-        return "in.eightfolds.OpenGraphExtractor.MetaItem{" +
+        return "OpenGraphItem{" +
                 "property='" + property + '\'' +
                 ", value='" + value + '\'' +
                 '}';
@@ -46,7 +48,8 @@ public class OpenGraphItem {
 
     public OpenGraphItem Clean() {
         if(property.contains(":")) {
-            setProperty(getProperty().split(":")[1]);
+            String prop = Arrays.stream(getProperty().split(":")).skip(1).collect(Collectors.joining("_"));
+            setProperty(prop);
         }
         return this;
     }
