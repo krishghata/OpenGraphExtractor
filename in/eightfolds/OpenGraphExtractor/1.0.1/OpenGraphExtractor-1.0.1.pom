@@ -13,7 +13,7 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <github.global.userName>krishghata</github.global.userName>
-        <github.global.password>31027a345f774a220d0fd261772d683b97e5e828</github.global.password>
+        <github.global.password>${githubPass}</github.global.password>
     </properties>
 
 
