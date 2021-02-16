@@ -5,7 +5,8 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String url = "https://www.rottentomatoes.com/m/back_to_the_future";
+//        String url = "https://www.rottentomatoes.com/m/back_to_the_future";
+        String url = "https://www.youtube.com/watch?v=zGLQ9ZRntZo";
         OpenGraphData data = OpenGraphExtractor.extract(url);
 //        System.out.println("Title: "+data.getTitle());
 //        System.out.println("Desc: "+data.getDescription());

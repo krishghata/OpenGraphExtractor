@@ -55,13 +55,16 @@ public class OpenGraphExtractor {
                         || itm.getProperty().equalsIgnoreCase("description"))
                 .filter(itm -> itm.getValue() != null && itm.getValue().trim().length() > 0)
                 .sorted((itm1, itm2) -> {
-                    if (itm1.getProperty().startsWith("og")) {
-                        return -1;
-                    } else if (itm1.getProperty().startsWith("twitter")
+                    if (itm1.getProperty().startsWith("og")
                             && !itm2.getProperty().startsWith("og")) {
+
                         return -1;
-                    } else {
+                    } else if (!itm1.getProperty().startsWith("og")
+                            && itm2.getProperty().startsWith("og")) {
+
                         return 1;
+                    } else {
+                        return 0;
                     }
                 })
                 .map(OpenGraphItem::Clean)
